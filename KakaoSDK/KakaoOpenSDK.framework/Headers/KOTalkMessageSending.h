@@ -1,8 +1,6 @@
 /**
  * Copyright 2015-2016 Kakao Corp.
  *
- * Redistribution and modification in source or binary forms are not permitted without specific prior written permission.
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -28,6 +26,34 @@
 @protocol KOTalkMessageSending <NSObject>
 
 @required
+
+/*!
+ @abstract 미리 지정된 메시지 템플릿(V2)을 사용하여, 카카오톡으로 메시지를 전송합니다. 제휴를 통해 권한이 부여된 특정 앱에서만 호출 가능합니다.
+ @param templateId 전송할 메시지 템플릿 ID.
+ @param templateArgs 메시지 템플릿을 완성하기 위해 필요한 추가 파라미터 정보.
+ @param completionHandler 요청 완료시 실행될 block. 오류 처리와 전송 완료 시 수행된다.
+ */
+- (KOSessionTask *)sendMessageWithTemplateId:(NSString *)templateId
+                                templateArgs:(NSDictionary<NSString *, id> *)templateArgs
+                           completionHandler:(void (^)(NSError *error))completionHandler;
+
+
+@optional
+
+/*!
+ @abstract 미리 지정된 메시지 템플릿(V2)을 사용하여, 카카오톡의 "나와의 채팅방"으로 메시지를 전송합니다. 모든 앱에서 호출 가능합니다.
+ @param templateId 전송할 메시지 템플릿 ID.
+ @param templateArgs 메시지 템플릿을 완성하기 위해 필요한 추가 파라미터 정보.
+ @param completionHandler 요청 완료시 실행될 block. 오류 처리와 전송 완료 시 수행된다.
+ */
+- (KOSessionTask *)sendMemoWithTemplateId:(NSString *)templateId
+                             templateArgs:(NSDictionary<NSString *, id> *)templateArgs
+                        completionHandler:(void (^)(NSError *error))completionHandler;
+
+
+
+#pragma mark - Deprecated
+
 /*!
  @abstract 미리 지정된 Message Template을 사용하여, 카카오톡으로 메시지를 전송합니다. 제휴를 통해 권한이 부여된 특정 앱에서만 호출 가능합니다.
  @param templateID 미리 지정된 템플릿 메시지 ID
@@ -36,9 +62,8 @@
  */
 - (KOSessionTask *)sendMessageWithTemplateID:(NSString *)templateID
                                    arguments:(NSDictionary *)arguments
-                           completionHandler:(void (^)(NSError *error))completionHandler;
+                           completionHandler:(void (^)(NSError *error))completionHandler DEPRECATED_ATTRIBUTE;
 
-@optional
 /*!
  @abstract 미리 지정된 Message Template을 사용하여, 카카오톡의 "나와의 채팅방"으로 메시지를 전송합니다. 모든 앱에서 호출 가능합니다.
  @param templateID 개발자 사이트를 통해 생성한 메시지 템플릿 id
@@ -47,7 +72,7 @@
  */
 - (KOSessionTask *)sendMemoWithTemplateID:(NSString *)templateID
                          messageArguments:(NSDictionary *)messageArguments
-                        completionHandler:(void (^)(NSError *error))completionHandler;
+                        completionHandler:(void (^)(NSError *error))completionHandler DEPRECATED_ATTRIBUTE;
 
 @end
 

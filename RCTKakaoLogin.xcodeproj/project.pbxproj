@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B349CB731D6D9AD500D406F5 /* RTCKakaoLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = B349CB721D6D9AD500D406F5 /* RTCKakaoLogin.m */; };
+		B349CB731D6D9AD500D406F5 /* KakaoLoginModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B349CB721D6D9AD500D406F5 /* KakaoLoginModule.m */; };
 		B349CB761D6D9B6A00D406F5 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B349CB751D6D9B6A00D406F5 /* KakaoOpenSDK.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,8 +25,8 @@
 
 /* Begin PBXFileReference section */
 		B349CB651D6D9A4C00D406F5 /* libRCTKakaoLogin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTKakaoLogin.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		B349CB711D6D9AD500D406F5 /* RTCKakaoLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTCKakaoLogin.h; sourceTree = "<group>"; };
-		B349CB721D6D9AD500D406F5 /* RTCKakaoLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTCKakaoLogin.m; sourceTree = "<group>"; };
+		B349CB711D6D9AD500D406F5 /* KakaoLoginModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KakaoLoginModule.h; sourceTree = "<group>"; };
+		B349CB721D6D9AD500D406F5 /* KakaoLoginModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KakaoLoginModule.m; sourceTree = "<group>"; };
 		B349CB751D6D9B6A00D406F5 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KakaoOpenSDK.framework; path = KakaoSDK/KakaoOpenSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,8 +62,8 @@
 		B349CB671D6D9A4C00D406F5 /* RCTKakaoLogin */ = {
 			isa = PBXGroup;
 			children = (
-				B349CB711D6D9AD500D406F5 /* RTCKakaoLogin.h */,
-				B349CB721D6D9AD500D406F5 /* RTCKakaoLogin.m */,
+				B349CB711D6D9AD500D406F5 /* KakaoLoginModule.h */,
+				B349CB721D6D9AD500D406F5 /* KakaoLoginModule.m */,
 			);
 			path = RCTKakaoLogin;
 			sourceTree = "<group>";
@@ -125,7 +125,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B349CB731D6D9AD500D406F5 /* RTCKakaoLogin.m in Sources */,
+				B349CB731D6D9AD500D406F5 /* KakaoLoginModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

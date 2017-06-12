@@ -147,7 +147,7 @@ public class KakaoLoginModule extends ReactContextBaseJavaModule implements Acti
                     map.putString("nickname", userProfile.getNickname());
                     map.putString("profile_image", userProfile.getProfileImagePath());
 
-                    map.putString("accessToken", Session.getCurrentSession().getAccessToken());
+                    map.putString("access_token", Session.getCurrentSession().getAccessToken());
 
                     promise.resolve(map);
                 }
