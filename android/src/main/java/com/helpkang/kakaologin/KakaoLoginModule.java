@@ -31,10 +31,11 @@ import com.kakao.util.exception.KakaoException;
 public class KakaoLoginModule extends ReactContextBaseJavaModule implements ActivityEventListener {
     private static final String TAG = "KAKAO";
 
-    private boolean isInitialized = false;
+    private static boolean isInitialized = false;
 
     public KakaoLoginModule(ReactApplicationContext reactContext) {
         super(reactContext);
+        init();
     }
 
     @Override
@@ -44,14 +45,12 @@ public class KakaoLoginModule extends ReactContextBaseJavaModule implements Acti
 
     @ReactMethod
     public void login(Promise promise) {
-        init();
         Session.getCurrentSession().addCallback(new SessionCallback(promise));
         Session.getCurrentSession().open(AuthType.KAKAO_TALK, getCurrentActivity());
     }
 
     @ReactMethod
     public void logout(final Promise promise) {
-        init();
         UserManagement.requestLogout(new LogoutResponseCallback() {
             /**
              * Always success regardless result
