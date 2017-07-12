@@ -27,7 +27,6 @@ import com.kakao.usermgmt.callback.MeResponseCallback;
 import com.kakao.usermgmt.response.model.UserProfile;
 import com.kakao.util.exception.KakaoException;
 
-
 public class KakaoLoginModule extends ReactContextBaseJavaModule implements ActivityEventListener {
     private static final String TAG = "KAKAO";
 
@@ -64,12 +63,12 @@ public class KakaoLoginModule extends ReactContextBaseJavaModule implements Acti
         });
     }
 
-    private void init(){
-        if(!isInitialized){
+    private void init() {
+        if (!isInitialized) {
             KakaoSDK.init(new KakaoSDKAdapter());
             getReactApplicationContext().addActivityEventListener(this);
             isInitialized = true;
-         }
+        }
     }
 
     @Override
@@ -147,7 +146,7 @@ public class KakaoLoginModule extends ReactContextBaseJavaModule implements Acti
             UserManagement.requestMe(new MeResponseCallback() {
                 @Override
                 public void onSuccess(UserProfile userProfile) {
-                    Log.v(TAG, "kakao : handleResult");
+                    Log.v(TAG, "onSuccess : ");
 
                     removeCallback();
 
@@ -155,7 +154,6 @@ public class KakaoLoginModule extends ReactContextBaseJavaModule implements Acti
                     map.putString("id", userProfile.getId() + "");
                     map.putString("nickname", userProfile.getNickname());
                     map.putString("profile_image", userProfile.getProfileImagePath());
-
                     map.putString("access_token", Session.getCurrentSession().getAccessToken());
 
                     promise.resolve(map);
@@ -163,7 +161,9 @@ public class KakaoLoginModule extends ReactContextBaseJavaModule implements Acti
 
                 @Override
                 public void onFailure(ErrorResult errorResult) {
+                    Log.w(TAG, "kakao : onFailure" + errorResult);
                     removeCallback();
+
                     promise.reject(String.valueOf(errorResult.getErrorCode()), errorResult.getErrorMessage());
                 }
 
@@ -175,14 +175,15 @@ public class KakaoLoginModule extends ReactContextBaseJavaModule implements Acti
 
                 @Override
                 public void onNotSignedUp() {
+                    Log.w(TAG, "kakao : onNotSignedUp");
                     removeCallback();
                     promise.reject("onNotSignedUp", "로그인 취소");
                 }
-
-                private void removeCallback() {
-                    Session.getCurrentSession().removeCallback(SessionCallback.this);
-                }
             });
+        }
+
+        private void removeCallback() {
+            Session.getCurrentSession().removeCallback(SessionCallback.this);
         }
 
         @Override
@@ -190,6 +191,8 @@ public class KakaoLoginModule extends ReactContextBaseJavaModule implements Acti
             if (exception != null) {
                 Log.v(TAG, "kakao : onSessionOpenFailed" + exception.toString());
             }
+            removeCallback();
+            promise.reject("onSessionOpenFailed", exception.toString());
         }
     }
 }
