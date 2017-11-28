@@ -19,16 +19,18 @@ RCT_REMAP_METHOD(login,
             rejecter:
             (RCTPromiseRejectBlock) reject) {
 
-    [[KOSession sharedSession] close];
-    [[KOSession sharedSession] openWithCompletionHandler:^(NSError *error) {
-        if ([[KOSession sharedSession] isOpen]) {
-            [self loginProcessResolve:resolve rejecter:reject];
-        } else {
-            // failed
-            NSLog(@"login cancel.");
-            reject(@"KAKAO_LOGIN_CANCEL", @"CANCEL", nil);
-        }
-    }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[KOSession sharedSession] close];
+        [[KOSession sharedSession] openWithCompletionHandler:^(NSError *error) {
+            if ([[KOSession sharedSession] isOpen]) {
+                [self loginProcessResolve:resolve rejecter:reject];
+            } else {
+                // failed
+                NSLog(@"login cancel.");
+                reject(@"KAKAO_LOGIN_CANCEL", @"CANCEL", nil);
+            }
+        }];
+    });
 }
 
 - (void)loginProcessResolve:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject {
